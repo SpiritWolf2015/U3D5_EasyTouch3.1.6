@@ -6,6 +6,12 @@ using System.Collections;
 /// </summary>
 public class JoystickEvent : MonoBehaviour {
 
+    private Animation m_Animation;
+
+    void Start ( ) {
+        m_Animation = GetComponent<Animation>( );
+    }
+
 	void OnEnable(){
 		EasyJoystick.On_JoystickMove += On_JoystickMove;
 		EasyJoystick.On_JoystickMoveEnd += On_JoystickMoveEnd;
@@ -28,17 +34,13 @@ public class JoystickEvent : MonoBehaviour {
 		}
 	}
 	void On_JoystickMove( MovingJoystick move){
-		
-		
-		if (move.joystickName == "Move_Turn_Joystick"){
-			
+		if ("Move_Turn_Joystick" == move.joystickName == ){			
 			//
 			if (Mathf.Abs(move.joystickAxis.y)>0 && Mathf.Abs(move.joystickAxis.y)<0.5){
-				GetComponent<Animation>().CrossFade("walk");
-				
+                m_Animation.CrossFade("walk");				
 			}	
 			else if (Mathf.Abs(move.joystickAxis.y)>=0.5){
-				GetComponent<Animation>().CrossFade("run");	
+                m_Animation.CrossFade("run");	
 			}
 		}
 	}
